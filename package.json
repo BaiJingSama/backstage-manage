@@ -5,10 +5,12 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli- service lint",
+    "start": "yarn serve"
   },
   "dependencies": {
     "core-js": "^3.8.3",
+    "element-ui": "2.15.10",
     "vue": "^2.6.14"
   },
   "devDependencies": {
