@@ -125,7 +125,6 @@ export default {
           type: 'line'
         })
       })
-      console.log(echarts1Option)
       // 根据配置显示图表
       echarts1.setOption(echarts1Option)
 
