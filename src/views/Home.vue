@@ -35,7 +35,9 @@
         <div ref="echarts1" style="height:280px"></div>
       </el-card>
       <div class="graph">
-        <el-card style="height:260px"></el-card>
+        <el-card style="height:260px">
+          <div ref="echarts2" style="height:260px"></div>
+        </el-card>
         <el-card style="height:260px"></el-card>
       </div>
     </el-col>
@@ -105,7 +107,7 @@ export default {
       // 指定图表的配置项和数据
       let echarts1Option = {}
       // 处理数据xAxis
-      const { orderData } = data.data
+      const { orderData, userData } = data.data
       const xAxis = Object.keys(orderData.data[0])
       const xAxisData = {
         data: xAxis
@@ -124,6 +126,55 @@ export default {
       console.log(echarts1Option)
       // 根据配置显示图表
       echarts1.setOption(echarts1Option)
+
+      // 柱状图
+      const echarts2 = echarts.init(this.$refs.echarts2)
+      const echarts2Option = {
+        legend: {
+          // 图例文字颜色
+          textStyle: {
+            color: "#333",
+          },
+        },
+        grid: {
+          left: "20%",
+        },
+        // 提示框
+        tooltip: {
+          trigger: "axis",
+        },
+        xAxis: {
+          type: "category", // 类目轴
+          data: userData.map(item => item.date),
+          axisLine: {
+            lineStyle: {
+              color: "#17b3a3",
+            },
+          },
+          axisLabel: {
+            interval: 0,
+            color: "#333",
+          },
+        },
+        yAxis: [
+          {
+            type: "value",
+            axisLine: {
+              lineStyle: {
+                color: "#17b3a3",
+              },
+            },
+          },
+        ],
+        color: ["#2ec7c9", "#b6a2de"],
+        series: [
+          { name: '新增用户', data: userData.map(item => item.new), type: 'bar' },
+          { name: '活跃用户', data: userData.map(item => item.active), type: 'bar' }
+        ],
+      }
+      echarts2.setOption(echarts2Option)
+
+      
     })
 
 
