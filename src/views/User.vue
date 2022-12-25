@@ -12,12 +12,12 @@
         </el-form-item>
         <el-form-item label="性别" prop="sex">
           <el-select v-model="form.sex" placeholder="请选择性别">
-            <el-option label="男" value="1"></el-option>
-            <el-option label="女" value="0"></el-option>
+            <el-option label="男" :value='1'></el-option>
+            <el-option label="女" :value='0'></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="出生日期" prop="birth">
-          <el-date-picker v-model="form.birth" type="date" placeholder="选择日期" />
+          <el-date-picker v-model="form.birth" type="date" placeholder="选择日期" value-format="yyyy-MM-DD" />
         </el-form-item>
         <el-form-item label="地址" prop="addr">
           <el-input placeholder="请输入地址" v-model="form.addr"></el-input>
@@ -30,13 +30,26 @@
 
     </el-dialog>
     <div class="manage-header">
-      <el-button type="primary" @click="dialogVisible = true">+ 新增</el-button>
+      <el-button type="primary" @click="handleAdd">+ 新增</el-button>
       <el-table :data="tableData" style="width: 100%">
-        <el-table-column prop="date" label="日期" width="180">
+        <el-table-column prop="name" label="姓名">
         </el-table-column>
-        <el-table-column prop="name" label="姓名" width="180">
+        <el-table-column prop="sex" label="性别">
+          <template slot-scope="scope">
+            <span style="margin-left:10px">{{scope.row.sex == 1 ? '男' : '女'}}</span>
+          </template>
         </el-table-column>
-        <el-table-column prop="address" label="地址">
+        <el-table-column prop="age" label="年龄">
+        </el-table-column>
+        <el-table-column prop="birth" label="出生日期">
+        </el-table-column>
+        <el-table-column prop="addr" label="地址">
+        </el-table-column>
+        <el-table-column prop="addr" label="编辑">
+          <template slot-scope="scope">
+            <el-button size="mini" @click="handleEdit(scope.row)">编辑</el-button>
+            <el-button type="danger" size="mini" @click="handleDelete(scope.row)">删除</el-button>
+          </template>
         </el-table-column>
       </el-table>
     </div>
@@ -44,6 +57,7 @@
 </template>
 
 <script>
+import { getUser, addUser, delUser, editUser } from '../api'
 export default {
   data() {
     return {
@@ -74,9 +88,8 @@ export default {
           { required: true, message: '请填写地址' }
         ]
       },
-      tableData:[
-        
-      ]
+      tableData: [],
+      modelType: 0 //0表示新增的弹窗，1表示编辑的弹窗
     };
   },
   methods: {
@@ -85,6 +98,17 @@ export default {
       this.$refs.form.validate((valid) => {
         if (valid) {
           // 后续对表单数据处理
+          if (this.modalType === 0) {
+            addUser(this.form).then(() => {
+              // 重新获取列表接口
+              this.getList()
+            })
+          } else {
+            editUser(this.form).then(() => {
+              // 重新获取列表接口
+              this.getList()
+            })
+          }
           console.log(this.form);
           this.$refs.form.resetFields()
           // 关闭弹窗
@@ -101,7 +125,45 @@ export default {
     // 点击取消的时候触发该方法
     cancel() {
       this.handleClose()
+    },
+    handleEdit(row) {
+      this.modelType = 1
+      this.dialogVisible = true
+      // 需要对当前行数据进行深拷贝、否则直接修改数据会报错
+      this.form = JSON.parse(JSON.stringify(row))
+    },
+    handleDelete(row) {
+      this.$confirm('此操作将永久删除该用户信息, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        delUser({ id: row.id }).then(() => {
+          this.$message.success('删除成功!');
+          this.getList()
+        })
+
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        });
+      });
+    },
+    handleAdd() {
+      this.modalType = 0
+      this.dialogVisible = true
+    },
+    //获取列表数据封装的一个方法
+    getList() {
+      getUser().then((data) => {
+        console.log(data);
+        this.tableData = data.data.list
+      })
     }
+  },
+  mounted() {
+    this.getList()
   }
 };
 </script>
