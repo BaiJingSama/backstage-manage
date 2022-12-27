@@ -16,7 +16,8 @@
 </template>
 
 <script>
-import Mock from 'mockjs'
+// import Mock from 'mockjs'
+import Cookie from 'js-cookie'
 
 import { getMenu } from '../api/index'
 export default {
@@ -46,11 +47,12 @@ export default {
             if (data.code === 20000) {
               data.data.token
               // token信息存进cookie用于不同页面之间的通信
-              localStorage.set('token', data.data.token)
-              document.cookie
-              // Cookie.set('token',data.data.token)
+              Cookie.set('token', data.data.token)
+              this.$message.success('登录成功，跳转到首页')
               // 跳转到首页
-              // this.$router.push('/home')
+              this.$router.push('/home')
+            } else {
+              this.$message.error(data.data.message)
             }
           })
         }
