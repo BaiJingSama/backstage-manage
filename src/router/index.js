@@ -6,6 +6,7 @@ import Main from "../views/Main";
 import Mall from "../views/Mall";
 import PageOne from "../views/PageOne";
 import PageTwo from "../views/PageTwo";
+import Login from "../views/Login";
 
 // 1.创建路由表
 // 2.将路由和组件进行映射
@@ -22,6 +23,10 @@ const routes = [
       { path: "page1", name: "page1", component: PageOne },
       { path: "page2", name: "page2", component: PageTwo },
     ],
+  },
+  {
+    path: "/login",
+    component: Login,
   },
 ];
 
