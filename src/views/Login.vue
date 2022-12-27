@@ -18,7 +18,7 @@
 <script>
 // import Mock from 'mockjs'
 import Cookie from 'js-cookie'
-
+import { mapMutations } from 'vuex'
 import { getMenu } from '../api/index'
 export default {
   data() {
@@ -38,6 +38,7 @@ export default {
     }
   },
   methods: {
+    ...mapMutations(['setMenu','addMenu']),
     submit() {
       // 第一步校验通过
       this.$refs.form.validate((valid) => {
@@ -48,8 +49,12 @@ export default {
               data.data.token
               // token信息存进cookie用于不同页面之间的通信
               Cookie.set('token', data.data.token)
-              this.$message.success('登录成功，跳转到首页')
+
+              // 获取菜单的数据，存入store中
+              this.setMenu(data.data.menu)
+              this.addMenu(this.$router)
               // 跳转到首页
+              this.$message.success('登录成功，跳转到首页')
               this.$router.push('/home')
             } else {
               this.$message.error(data.data.message)
