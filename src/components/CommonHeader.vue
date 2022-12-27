@@ -36,9 +36,12 @@ export default {
       if (command === 'cancel') {
         // 清除用户登录成功保存的token
         Cookie.remove('token')
+        // 清除localStorage中的menu
+        localStorage.removeItem('menu')
         // 跳转到登录页面
-        this.$router.replace('/login')
         this.$message.success('退出登录成功，跳转到登录界面')
+        this.$router.replace('/login')
+
       }
     }
   },
