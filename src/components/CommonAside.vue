@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <el-menu default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose"
       :collapse="isCollapse" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
       <h3>{{isCollapse? '后台':'白境的后台管理系统'}}</h3>
@@ -63,15 +63,21 @@ export default {
 </script>
 
 <style lang="less"  scoped>
+.container {
+  height: 100%;
+  min-height: 100%;
+}
+
 .el-menu-vertical-demo:not(.el-menu--collapse) {
   width: 200px;
-  min-height: 400px;
+  min-height: 100%;
   border: 0;
 }
 
 .el-menu {
   height: 100vh;
   border-right: none;
+  overflow: hidden;
 
   h3 {
     color: #fff;

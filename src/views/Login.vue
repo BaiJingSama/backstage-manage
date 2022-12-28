@@ -38,7 +38,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['setMenu','addMenu']),
+    ...mapMutations(['setMenu', 'addMenu']),
     submit() {
       // 第一步校验通过
       this.$refs.form.validate((valid) => {

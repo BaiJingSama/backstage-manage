@@ -11,6 +11,10 @@ const http = axios.create({
 http.interceptors.request.use(
   function (config) {
     //发送请求前要做些什么
+    // const headers = config.headers;
+    // // const {token = ""} = storage.getItem('userInfo') || {};
+    // if(!headers.Authorization) headers.Authorization = "Bearer" +
+    // 'token字符串'
     return config;
   },
   function (error) {

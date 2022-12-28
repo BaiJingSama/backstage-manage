@@ -2,7 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Main from "../views/Main";
 import Login from "../views/Login";
-import NotFound from "../views/NotFound";
+// import NotFound from "../views/NotFound";
 
 // 1.创建路由表
 // 2.将路由和组件进行映射
@@ -23,6 +23,7 @@ const routes = [
   },
   {
     path: "/login",
+    name: "login",
     component: Login,
   },
   // {
