@@ -6,6 +6,7 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import "./api/mock";
+import Cookie from "js-cookie";
 
 Vue.config.productionTip = false;
 
@@ -15,6 +16,13 @@ Vue.config.productionTip = false;
 
 // 全局引入
 Vue.use(ElementUI);
+
+router.beforeEach((to, from, next) => {
+  if (to.name !== "login" && !Cookie.get("token")) {
+    console.log("路由守卫了");
+    return next({ name: "login" });
+  } else next();
+});
 
 new Vue({
   render: (h) => h(App),

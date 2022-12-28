@@ -51,6 +51,7 @@ ul {
   box-sizing: border-box;
 }
 
+
 table {
   border-collapse: collapse;
   border-spacing: 0;
