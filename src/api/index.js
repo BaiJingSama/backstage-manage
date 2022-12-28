@@ -27,3 +27,19 @@ export const delUser = (data) => {
 export const getMenu = (data) => {
   return http.post("/permission/getMenu", data);
 };
+
+export const getProduct =(params) =>{
+  return http.get('/product/getProduct',params)
+}
+
+export const addProduct = (data) => {
+  return http.post("/product/add", data);
+};
+
+export const editProduct = (data) => {
+  return http.post("/product/edit", data);
+};
+
+export const delProduct = (data) => {
+  return http.post("/product/del", data);
+};
