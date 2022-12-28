@@ -54,7 +54,7 @@ export default {
     return {
       tableData: [],
       tableLabel: {
-        name: '课程',
+        name: '产品',
         todayBuy: '今日购买',
         monthBuy: '本月购买',
         totalBuy: '总购买'

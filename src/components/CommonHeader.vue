@@ -13,8 +13,8 @@
           <img class="user" src="../assets/images/user.png" alt="">
         </span>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item>个人中心</el-dropdown-item>
-          <el-dropdown-item command="cancel">退出</el-dropdown-item>
+          <el-dropdown-item command="personal">个人中心</el-dropdown-item>
+          <el-dropdown-item command="cancel">退出账号</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </div>
@@ -41,7 +41,9 @@ export default {
         // 跳转到登录页面
         this.$message.success('退出登录成功，跳转到登录界面')
         this.$router.replace('/login')
-
+      }
+      if (command === 'personal') {
+        this.$message.success('正在努力建设中。。。')
       }
     }
   },
