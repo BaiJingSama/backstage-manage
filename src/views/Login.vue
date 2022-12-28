@@ -42,7 +42,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['setMenu', 'addMenu']),
+    ...mapMutations(['setMenu', 'addMenu', 'setUser']),
     submit() {
       // 第一步校验通过
       this.$refs.form.validate((valid) => {
@@ -57,6 +57,8 @@ export default {
               // 获取菜单的数据，存入store中
               this.setMenu(data.data.menu)
               this.addMenu(this.$router)
+              // 获取用户数据，存入store中
+              this.setUser(data.data.user)
               // 跳转到首页
               this.$message.success('登录成功，跳转到首页')
               this.$router.push('/home')

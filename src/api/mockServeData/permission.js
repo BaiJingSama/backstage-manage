@@ -1,4 +1,5 @@
 import Mock from "mockjs";
+import dayjs from "dayjs";
 export default {
   getMenu: (config) => {
     const { username, password } = JSON.parse(config.body);
@@ -8,6 +9,11 @@ export default {
       return {
         code: 20000,
         data: {
+          user: {
+            name: username,
+            level: "超级管理员",
+            date: dayjs().format("YYYY-MM-DD HH:mm"),
+          },
           menu: [
             {
               path: "/home",
@@ -59,6 +65,11 @@ export default {
       return {
         code: 20000,
         data: {
+          user: {
+            name: username,
+            level: "普通管理员",
+            date: dayjs().format("YYYY-MM-DD HH:mm"),
+          },
           menu: [
             {
               path: "/home",
@@ -83,6 +94,11 @@ export default {
       return {
         code: 20000,
         data: {
+          user: {
+            name: username,
+            level: "超级管理员",
+            date: dayjs().format("YYYY-MM-DD HH:mm"),
+          },
           menu: [
             {
               path: "/home",

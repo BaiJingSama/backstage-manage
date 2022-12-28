@@ -11,6 +11,11 @@ export default {
       },
     ], //  面包屑数据
     menu: [],
+    user: {
+      name: "",
+      level: "",
+      date: "",
+    },
   },
   mutations: {
     //修改菜单展开收起的方法
@@ -66,6 +71,11 @@ export default {
       menuArray.forEach((item) => {
         router.addRoute("Main", item);
       });
+    },
+    // 保存用户数据
+    setUser(state, user) {
+      state.user = user;
+      localStorage.setItem("user", JSON.stringify(user));
     },
   },
 };

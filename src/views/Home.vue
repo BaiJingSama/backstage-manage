@@ -5,12 +5,12 @@
         <div class="user">
           <img src="../assets/images/user.png" alt="">
           <div class="userinfo">
-            <p class="name">Admin</p>
-            <p class="access">超级管理员</p>
+            <p class="name">{{user.name}}</p>
+            <p class="access">{{user.level}}</p>
           </div>
         </div>
         <div class="login-info">
-          <p>上次登录时间：<span>2022-12-1</span></p>
+          <p>上次登录时间：<span>{{user.date}}</span></p>
           <p>上次登录地点：<span>成都</span></p>
         </div>
       </el-card>
@@ -198,10 +198,14 @@ export default {
         ],
       }
       echarts3.setOption(echarts3Option)
-
     })
 
 
+  },
+  computed: {
+    user() {
+      return JSON.parse(localStorage.getItem('user')) || this.$store.state.tab.user
+    }
   }
 }
 </script>
