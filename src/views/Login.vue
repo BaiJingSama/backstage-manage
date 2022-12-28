@@ -11,6 +11,10 @@
       <el-form-item>
         <el-button @click="submit" type="primary">登录</el-button>
       </el-form-item>
+      <el-form-item size="mini">
+        <el-button @click="user1" type="primary">完整权限</el-button>
+        <el-button @click="user2" type="primary">部分权限</el-button>
+      </el-form-item>
     </el-form>
   </div>
 </template>
@@ -63,6 +67,14 @@ export default {
         }
       })
 
+    },
+    user1() {
+      this.form.username = "baijing";
+      this.form.password = '123'
+    },
+    user2() {
+      this.form.username = 'xiaoxiao';
+      this.form.password = 'xiaoxiao'
     }
   }
 }
@@ -96,5 +108,12 @@ export default {
   .el-input {
     width: 198px;
   }
+}
+
+.userContainer {
+  display: flex;
+  margin: 0 50%;
+  transform: translateX(-100%);
+
 }
 </style>
